@@ -3,7 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="Inicio" >Inicio</string>
+    <string name="Inicio">Inicio</string>
     <string name="Productos">Productos</string>
     <string name="Pedidos">Pedidos</string>
+    <string name="vista_scroll">Esta vista contiene una lista de elementos desplazables.</string>
 </resources>

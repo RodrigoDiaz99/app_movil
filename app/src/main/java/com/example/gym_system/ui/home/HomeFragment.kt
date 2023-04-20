@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import com.example.gym_system.R
 import com.example.gym_system.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -18,21 +20,20 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        val fragmentManager = parentFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+
+
+        fragmentTransaction.setReorderingAllowed(true)
+
+        return view
     }
 
     override fun onDestroyView() {
