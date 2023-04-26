@@ -1,10 +1,252 @@
 <resources>
-    <string name="app_name">gym_system</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="Inicio">Inicio</string>
-    <string name="Productos">Productos</string>
-    <string name="Pedidos">Pedidos</string>
-    <string name="vista_scroll">Esta vista contiene una lista de elementos desplazables.</string>
+    <string name="app_name">INSEJUPY MOVIL</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="insejupy">INSEJUPY</string>
+    <string name="item_2">Item 2</string>
+    <string name="item_1">Item 1</string>
+    <string name="item_3">Item 3</string>
+    <string name="item_4">Item 4</string>
+    <string name="item_6">Item 6</string>
+    <string name="item_7">Item 7</string>
+    <string name="inicio">Inicio</string>
+    <string name="seguimiento">Seguimiento</string>
+    <string name="consultatomo">CONSULTA POR TOMO</string>
+    <string name="tomo">TOMO</string>
+    <string name="libro">LIBRO</string>
+    <string name="verifica_documento_rpp">Verifica Documento RPP</string>
+    <string name="verifica_qr_catastro">Verifica QR Catastro</string>
+    <string name="consultar_por">Consultar Por</string>
+    <string name="consultaFolioE">Consultar Por Folio Electronico</string>
+    <string name="consultaNomenclatura">Consultar Por Nomenclatura</string>
+    <string name="consultaTablaje">Consultar Por Tablaje</string>
+    <string name="consultaInfoCat">Consultar Por Informacion Catastral</string>
+    <string name="datos_del_tomo">Datos del tomo</string>
+    <string name="datos_del_predio">Datos del predio</string>
+    <string name="acceder">Acceder</string>
+    <string name="notaria_digital">Notaria Digital</string>
+    <string name="ciudadano">Ciudadano</string>
+    <string name="comercio">Comercio</string>
+    <string name="avaluo">Avaluo</string>
+    <string name="catastro">Catastro</string>
+    <string name="calle">Calle</string>
+    <string name="numero">Numero</string>
+    <string name="seccion">Seccion</string>
+    <string name="manzana">Manzana</string>
+    <string name="municipioSelect">Selecciona municipio</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Bienvenido a seguimiento</string>
+    <string name="todo">TODO</string>
+    <string name="buscar">Buscar</string>
+    <string name="rpp">RPP</string>
+    <string name="a_o">Año Fiscal</string>
+    <string name="solicitud">Solicitud</string>
+    <string name="error_loadind_solicitudes">Ocurrio un problema al cargar las solicitudes</string>
+    <string name="Scan">Escanea</string>
+    <string name="item_label">Selecciona</string>
+    <string name="tipopredio">TIPO DE PREDIO</string>
+    <string name="folio">FOLIO</string>
+    <string name="letra">LETRA</string>
+    <string name="volumen">VOLUMEN</string>
+    <string name="selecciona">Selecciona</string>
+    <string name="regresar">Regresar</string>
+    <string name="consultaSeg">Consultar</string>
+    <string name="cedula">CEDULAS</string>
+    <string name="inscripcion">INSCRIPCION</string>
+
+    <!-- Navegacion datos predio -->
+    <string name="folioe">Folio Electronico</string>
+    <string name="nomenclatura">NOMENCLATURA</string>
+    <string name="Tablaje">TABLAJE</string>
+    <string name="departamento">DEPARTAMENTO</string>
+    <string name="edificio">EDIFICIO</string>
+    <string name="nivel">NIVEL</string>
+    <string name="condominio">CONDOMINIO</string>
+    <string name="registral">Registral</string>
+    <string name="catastral">Catastral</string>
+    <string name="tablaje">Tablaje</string>
+    <string name="infoCat">Informacion Catastral</string>
+    <string name="resultado_seguimiento">RESULTADO DEL SEGUIMIENTO</string>
+    <string name="resultado">RESULTADO</string>
+    <string name="consulta_seguimiento">CONSULTA SEGUIMIENTO</string>
+    <string name="back">Regresar</string>
+    <string name="info_folio">INFORMACION FOLIO:</string>
+    <string name="boleta_general">Boleta General</string>
+    <string name="descargar_pdf">Descargar PDF</string>
+    <string name="descargar_tomo">Descargar Tomo</string>
+    <string name="qr_rpp">Qr RPP</string>
+    <string name="documento_catastral">Documento Catastral</string>
+    <string name="ver_seguimiento">Ver Seguimiento</string>
+    <string name="cargando">Cargando...</string>
+    <string name="text_image">Logo de mi aplicación</string>
+    <string name="ver_pdf">ver PDF</string>
+
+    <string-array name="modo_seg">
+        <item>Selecciona</item>
+        <item>Ciudadano</item>
+        <item>Comercio</item>
+        <item>Notaria</item>
+        <item>Catastro</item>
+        <item>Avaluo</item>
+    </string-array>
+
+    <string-array name="libros">
+        <item>SELECCIONA LIBRO</item>
+        <item>PRIMERO</item>
+        <item>SEGUNDO</item>
+        <item>TERCERO</item>
+        <item>CUARTO</item>
+        <item>SEXTO</item>
+        <item>NOVENO</item>
+        <item>TERCERO DEL REGISTRO DEL CREDITO AGRICOLA</item>
+        <item>2DO COMERCIO</item>
+        <item>5TO AGRICOLA</item>
+        <item>SEXTO AUXILIAR</item>
+        <item>TERRENOS NACIONALES</item>
+        <item>REGISTRO DE CREDITO RURAL</item>
+    </string-array>
+
+    <string-array name="municipios">
+        <item>SELECCIONA</item>
+        <item>ABALA</item>
+        <item>ACANCEH</item>
+        <item>AKIL</item>
+        <item>BACA</item>
+        <item>BOKOBA</item>
+        <item>BUCTZOTZ</item>
+        <item>CACALCHEN</item>
+        <item>CALOTMUL</item>
+        <item>CANSAHCAB</item>
+        <item>CANTAMAYEC</item>
+        <item>CELESTUN</item>
+        <item>CENOTILLO</item>
+        <item>CONKAL</item>
+        <item>CUNCUNUL</item>
+        <item>CUZAMA</item>
+        <item>CHACSINKIN</item>
+        <item>CHANKOM</item>
+        <item>CHAPAB</item>
+        <item>CHEMAX</item>
+        <item>CHICXULUB PUEBLO</item>
+        <item>CHICHIMILA</item>
+        <item>CHIKINDZONOT</item>
+        <item>CHOCHOLA</item>
+        <item>CHUMAYEL</item>
+        <item>DZAN</item>
+        <item>DZEMUL</item>
+        <item>DZIDZANTUN</item>
+        <item>DZILAM DE BRAVO</item>
+        <item>DZILAM GONZALEZ</item>
+        <item>DZITAS</item>
+        <item>DZONCAUICH</item>
+        <item>ESPITA</item>
+        <item>HALACHO</item>
+        <item>HOCABA</item>
+        <item>HOCTUN</item>
+        <item>HOMUN</item>
+        <item>HUHI</item>
+        <item>HUNUCMA</item>
+        <item>IXIL</item>
+        <item>IZAMAL</item>
+        <item>KANASIN</item>
+        <item>KANTUNIL</item>
+        <item>KAUA</item>
+        <item>KINCHIL</item>
+        <item>KOPOMA</item>
+        <item>MAMA</item>
+        <item>MANI</item>
+        <item>MAXCANU</item>
+        <item>MAYAPAN</item>
+        <item>INSEJUPY</item>
+        <item>MOCOCHA</item>
+        <item>MOTUL</item>
+        <item>MUNA</item>
+        <item>MUXUPIP</item>
+        <item>OPICHEN</item>
+        <item>OXKUTZCAB</item>
+        <item>PANABA</item>
+        <item>PETO</item>
+        <item>PROGRESO</item>
+        <item>QUINTANA ROO</item>
+        <item>RIO LAGARTOS</item>
+        <item>SACALUM</item>
+        <item>SAMAHIL</item>
+        <item>SANAHCAT</item>
+        <item>SAN FELIPE</item>
+        <item>SANTA ELENA</item>
+        <item>SEYE</item>
+        <item>SINANCHE</item>
+        <item>SOTUTA</item>
+        <item>SUCILA</item>
+        <item>SUDZAL</item>
+        <item>SUMA</item>
+        <item>TAHDZIU</item>
+        <item>TAHMEK</item>
+        <item>TEABO</item>
+        <item>TECOH</item>
+        <item>TEKAL DE VENEGAS</item>
+        <item>TEKANTO</item>
+        <item>TEKAX</item>
+        <item>TEKIT</item>
+        <item>TEKOM</item>
+        <item>TELCHAC PUEBLO</item>
+        <item>TELCHAC PUERTO</item>
+        <item>TEMAX</item>
+        <item>TEMOZON</item>
+        <item>TEPAKAN</item>
+        <item>TETIZ</item>
+        <item>TEYA</item>
+        <item>TICUL</item>
+        <item>TIMUCUY</item>
+        <item>TINUM</item>
+        <item>TIXCACALCUPUL</item>
+        <item>TIXKOKOB</item>
+        <item>TIXMEHUAC</item>
+        <item>TIXPEHUAL</item>
+        <item>TIZIMIN</item>
+        <item>TUNKAS</item>
+        <item>TZUCACAB</item>
+        <item>UAYMA</item>
+        <item>UCU</item>
+        <item>UMAN</item>
+        <item>VALLADOLID</item>
+        <item>XOCCHEL</item>
+        <item>YAXCABA</item>
+        <item>YAXKUKUL</item>
+        <item>YOBAIN</item>
+    </string-array>
+
+    <string-array name="Tpredio">
+        <item>TODOS</item>
+        <item>URBANO</item>
+        <item>RUSTICO</item>
+        <item>COMERCIO</item>
+    </string-array>
+
+    <string-array name="volumen">
+        <item>TODOS</item>
+        <item>UNICO</item>
+        <item>PRIMERO</item>
+        <item>SEGUNDO</item>
+        <item>TERCERO</item>
+        <item>CUARTO</item>
+        <item>QUINTO</item>
+        <item>BIS</item>
+        <item>SEXTO</item>
+        <item>AUXILIAR UNICO</item>
+    </string-array>
+
+    <string-array name="DatosPredio">
+        <item>Folio Electronico</item>
+        <item>Nomenclatura</item>
+        <item>Tablaje</item>
+        <item>Informacion Catastral</item>
+    </string-array>
+
+    <string-array name="DetallesPredio">
+        <item>Cedula</item>
+        <item>Inscripcion</item>
+        <item>Nomenclatura</item>
+    </string-array>
+
 </resources>

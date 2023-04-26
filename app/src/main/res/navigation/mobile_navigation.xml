@@ -3,23 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nav_home">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.gym_system.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:id="@+id/nav_home"
+        android:name="com.example.pruebadrawer.ui.home.HomeFragment"
+        android:label="@string/inicio"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.gym_system.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/nav_qr_catastro"
+        android:name="com.example.pruebadrawer.ui.qr.catastro.QrCatastroFragment"
+        android:label="@string/verifica_qr_catastro"
+        tools:layout="@layout/fragment_qr_catastro" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.gym_system.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/nav_qr_rpp"
+        android:name="com.example.pruebadrawer.ui.qr.rpp.QrRppFragment"
+        android:label="@string/verifica_documento_rpp"
+        tools:layout="@layout/fragment_qr_rpp" />
+
+    <fragment
+        android:id="@+id/nav_productos"
+        android:name="com.example.gym_system.ui.productos.ProductsFragment"
+        android:label="@string/seguimiento"
+        tools:layout="@layout/fragment_seguimiento" />
+
+    <fragment
+        android:id="@+id/nav_predio"
+        android:name="com.example.pruebadrawer.ui.datospredio.ConsultarPredioFragment"
+        android:label="@string/datos_del_predio"
+        tools:layout="@layout/fragment_consultar_predio" />
+
+    <fragment
+        android:id="@+id/nav_tomo"
+        android:name="com.example.pruebadrawer.ui.datostomo.DatosTomoFragment"
+        android:label="@string/datos_del_tomo"
+        tools:layout="@layout/fragment_datos_tomo" />
 </navigation>

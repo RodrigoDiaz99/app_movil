@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/inicio"
+            app:showAsAction="ifRoom"/>
+
+        <item android:id="@+id/nav_productos"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/seguimiento"
+            />
+
+        <item
+            android:id="@+id/nav_qr_rpp"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/verifica_documento_rpp" />
+
+        <item
+            android:id="@+id/nav_qr_catastro"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/verifica_qr_catastro" />
+    </group>
+
+
+</menu>

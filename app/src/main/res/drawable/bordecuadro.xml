@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- view border color and width -->
+    <stroke
+        android:width="20dp"
+        android:color="@color/background_oficial">
+    </stroke>
+
+    <!-- The radius makes the corners rounded -->
+    <corners
+        android:radius="20dp"   >
+    </corners>
+</shape>

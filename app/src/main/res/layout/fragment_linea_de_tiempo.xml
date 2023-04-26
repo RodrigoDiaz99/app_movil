@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vista_solicitud"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragments.seguimiento.rpp.LineaTiempoRPPFragment">
+
+            <TableLayout
+                android:id="@+id/tlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:background="@color/background_oficial"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/btnRegresar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/custom_button"
+                        android:drawableStart="@drawable/ic_baseline_arrow_back_24"
+                        android:drawableTint="#FFFFFF"
+                        android:minWidth="50dp"
+                        android:textColor="@color/white"
+                        android:paddingStart="10dp"
+                        android:text="@string/regresar"
+                        android:textSize="18sp"
+                        app:backgroundTint="@null"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.589"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.651"
+                        tools:ignore="RtlSymmetry"
+                        tools:targetApi="m" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/textTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/consulta_seguimiento"
+                        android:textAlignment="center"
+                        android:textColor="@color/color_texto_general"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:id="@+id/LineaCabecera1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:layout_span="6"
+                        android:background="#FFFFFF" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/SeparadorCabecera"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:id="@+id/LineaCabecera"
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:layout_span="6"
+                        android:background="#FFFFFF" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtDatos"
+                        android:layout_width="399dp"
+                        android:layout_height="match_parent"
+
+                        android:textAlignment="center"
+                        android:textColor="@color/color_texto_general"
+                        android:textSize="0sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </TableRow>
+
+                <LinearLayout
+                    android:id="@+id/timeline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+            </TableLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</ScrollView>

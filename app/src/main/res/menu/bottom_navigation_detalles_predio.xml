@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/cedula"
+        android:id="@+id/btnCedula"/>
+    <item android:title="@string/inscripcion"
+        android:id="@+id/btnInscripcion"/>
+    <item android:title="@string/nomenclatura"
+        android:id="@+id/btnNomenclatura"/>
+
+</menu>
