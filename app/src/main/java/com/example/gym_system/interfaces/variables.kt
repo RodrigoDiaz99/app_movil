@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
-const val rutaancj = "http://ancj.insejupy.gob.mx/api/"
+const val rutaancj = "https://spaciofems.plataformauniversal.com/api/"
 lateinit var service: com.example.gym_system.interfaces.APIServices
 private val client = OkHttpClient()
 private val gson: Gson = GsonBuilder()

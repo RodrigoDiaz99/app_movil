@@ -80,6 +80,8 @@
     <string name="cargando">Cargando...</string>
     <string name="text_image">Logo de mi aplicación</string>
     <string name="ver_pdf">ver PDF</string>
+    <string name="searchbar_hint">Buscar</string>
+    <string name="productos">Productos</string>
 
     <string-array name="modo_seg">
         <item>Selecciona</item>

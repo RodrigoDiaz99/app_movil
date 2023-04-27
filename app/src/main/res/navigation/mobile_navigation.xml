@@ -39,5 +39,5 @@
         android:id="@+id/nav_tomo"
         android:name="com.example.pruebadrawer.ui.datostomo.DatosTomoFragment"
         android:label="@string/datos_del_tomo"
-        tools:layout="@layout/fragment_datos_tomo" />
+        tools:layout="@layout/fragment_pedido" />
 </navigation>

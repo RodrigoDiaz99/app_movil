@@ -1,20 +1,17 @@
 package com.example.gym_system.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Button
-import android.widget.TextView
+
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
-import androidx.lifecycle.ViewModelProvider
-import com.example.pruebadrawer.R
-import com.example.pruebadrawer.databinding.FragmentHomeBinding
-import com.example.pruebadrawer.ui.seguimiento.SeguimientoFragment
+
+import com.example.gym_system.databinding.FragmentHomeBinding
+
 
 class HomeFragment : Fragment() {
 
@@ -24,6 +21,7 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,7 +33,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val myWebView: WebView = binding.webview1
-        myWebView.loadUrl("https://www.insejupy.gob.mx/")
+        myWebView.loadUrl("https://spaciofems.plataformauniversal.com/")
 
         myWebView.settings.apply {
             javaScriptEnabled = true

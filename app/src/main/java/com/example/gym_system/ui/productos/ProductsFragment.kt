@@ -15,13 +15,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
-import com.example.app_insejupy.models.seguimiento.rpp.Detalle
-import com.example.app_insejupy.models.seguimiento.rpp.Seguimiento
+
+import com.example.gym_system.R
+import com.example.gym_system.databinding.FragmentProductosBinding
+import com.example.gym_system.interfaces.*
+import com.example.gym_system.models.productos.Data
+import com.example.gym_system.models.productos.getProducts
 import com.example.gym_system.ui.productos.rpp.LineaTiempoRPPFragment
 import com.example.pruebadrawer.*
-import com.example.pruebadrawer.databinding.FragmentVistaSolicitudBinding
-import com.example.pruebadrawer.interfaces.*
-import com.example.pruebadrawer.ui.seguimiento.SeguimientoFragment
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,56 +32,49 @@ import retrofit2.Response
 class ProductsFragment(
 
 
-) : Fragment(R.layout.fragment_vista_solicitud) {
+) : Fragment(R.layout.fragment_productos) {
 
 
     lateinit var title: TextView
     lateinit var llcontenedor: LinearLayout
     lateinit var btnRegresa: Button
-    private var _binding: Fra = null
-    private val binding get() = _binding!!
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentVistaSolicitudBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val root = inflater.inflate(R.layout.fragment_productos, container, false)
+
         val fragmentManager = parentFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        title = binding.txtDatos
-        llcontenedor = binding.llcontenedor
-        btnRegresa = binding.btnRegresar
+        title = root.findViewById(R.id.txtDatos)
+        llcontenedor = root.findViewById(R.id.llcontenedor)
+        btnRegresa = root.findViewById(R.id.btnRegresar)
         fragmentTransaction.setReorderingAllowed(true)
-        btnRegresa.setOnClickListener {
-            fragmentTransaction.replace(
-                R.id.nav_host_fragment_content_main,
-                SeguimientoFragment()
-            )
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
 
-        loadSeguimiento(iIDSolicitud, iIDAnioFiscal)
+
+        loadSeguimiento()
         return root
     }
 
 
-    private fun loadSeguimiento(iIDSolicitud: Int, iIDAnioFiscal: Int) {
+    private fun loadSeguimiento() {
         service = retrofit.create(com.example.gym_system.interfaces.APIServices::class.java)
 
-        service.getSolicitud(iIDSolicitud, iIDAnioFiscal).enqueue(object : Callback<Seguimiento> {
-            override fun onResponse(call: Call<Seguimiento>, response: Response<Seguimiento>) {
+        service.getProductos().enqueue(object : Callback<getProducts> {
+            override fun onResponse(call: Call<getProducts>, response: Response<getProducts>) {
                 response.body()?.let { post ->
                     if (response.isSuccessful) {
-                        val jsonDecode = gson2.fromJson(gson2.toJson(post), Seguimiento::class.java)
+                        val jsonDecode = gson2.fromJson(gson2.toJson(post), getProducts::class.java)
 
                         if (jsonDecode.lSuccess) {
                             SweetAlert.showSuccessDialog(
                                 requireContext(),
                                 message_success
                             )
-                            title.append("TRAMITES DE SOLICITUD: ${jsonDecode.data.iIDSolicitud}-${jsonDecode.data.iIDAnioFiscal}\n")
-                            jsonDecode.data.detalles.forEach { detalle ->
+                            title.append("Productos:\n")
+                            jsonDecode.data.forEach { detalle ->
                                 createViewForDetalle(detalle)
                             }
                         } else {
@@ -99,7 +94,7 @@ class ProductsFragment(
                 }
             }
 
-            override fun onFailure(call: Call<Seguimiento>, t: Throwable) {
+            override fun onFailure(call: Call<getProducts>, t: Throwable) {
                 SweetAlert.showErrorDialog(
                     requireContext(),
                     message_api_error
@@ -111,77 +106,21 @@ class ProductsFragment(
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    private fun createViewForDetalle(it: Detalle) {
+    private fun createViewForDetalle(it: Data) {
         val cetapa: String
         val txtdinamico = TextView(context)
         val btnseguimiento = Button(context)
         val espacio = TextView(context)
         val icon = requireContext().getDrawable(R.drawable.icon_info)
         val buttonWidth = 550
-        val iddetalle = it.iIDDetalle
+        val iddProducto = it.iIDProducto
         val params = LinearLayout.LayoutParams(buttonWidth, LinearLayout.LayoutParams.WRAP_CONTENT)
 
-        val cEstatus: String = when (it.cEstatus) {
-            "A" -> "ANÁLISIS Y CAPTURA"
-            "AS" -> "ASIGNADO"
-            "B" -> "VALIDACIÓN"
-            "C" -> {
-                "CANCELADO (DENEGADO)"
-            }
-            "CC" -> {
-                "CANCELADO"
-            }
-            "CF" -> "CAPTURA FINAL"
-            "CI" -> "CAPTURA INICIAL"
-            "D" -> {
 
-                "SUBSANADO"
-            }
-            "E" -> "POR ENTREGAR"
-            "EX" -> "EXPORTADO"
-            "F" -> "FINAL"
-            "G" -> "ENTREGADO"
-            "I" -> "RECEPCIÓN"
-            "J" -> "CALIFICACIÓN"
-            "L" -> "CALIFICADO"
-            "M" -> "EN FIRMA"
-            "N", "OB" -> {
+        val cNombre = "Nombre: ${it.cNombreProduct}"
+        val cCodeBar = "Codigo de Barras: ${it.cCodeBar}"
 
-                "OBSERVADO"
-            }
-            "O" -> {
 
-                "OBJETADO"
-            }
-            "P" -> {
-
-                "SUSPENDIDO"
-            }
-            "Q" -> {
-
-                "EN FIRMA (DENEGADO)"
-            }
-            "QF" -> "CALIDAD FINAL"
-            "QI" -> "CALIDAD INICIAL"
-            "R" -> "CAPTURA DEL PREDIO"
-            "RF" -> "REVISIÓN FINAL"
-            "RI" -> "REVISIÓN INICIAL"
-            "RP" -> "AUTORIZADO"
-            "RR" -> "CORREGIDO"
-            "S" -> "SUBSANADO"
-            "T" -> {
-
-                "ENTREGADO (DENEGADO)"
-            }
-            "V" -> "AUTORIZACIÓN"
-            "X" -> "EN ESPERA"
-            else -> ""
-        }
-
-        val coperacion = "Tramite: ${it.cOperacion}"
-        val iIDPredio = "Folio Electrónico: ${it.iIDPredio}"
-        cetapa = "Etapa Actual: $cEstatus"
-        val cmotivo = "Motivo: ${it.cMotivo}"
 
 
         @Suppress("DEPRECATION")
@@ -202,22 +141,12 @@ class ProductsFragment(
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
             text = context.getString(R.string.ver_seguimiento)
             layoutParams = params
-            setOnClickListener {
-                SweetAlert.showProgressDialog(requireContext())
-                parentFragmentManager.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .replace(
-                        R.id.nav_host_fragment_content_main,
-                        LineaTiempoRPPFragment(iIDSolicitud, iIDAnioFiscal, iddetalle)
-                    )
-                    .addToBackStack(null)
-                    .commit()
-            }
+
         }
 
         txtdinamico.apply {
             setPaddingRelative(50, 0, 50, 0)
-            text = listOf(coperacion, iIDPredio, cetapa, cmotivo)
+            text = listOf(cNombre, cCodeBar)
                 .filter { it.isNotEmpty() }
                 .joinToString(separator = "\n")
             textSize = 20F
@@ -235,7 +164,6 @@ class ProductsFragment(
                 setBackgroundColor(Color.parseColor("#CCCCCC"))
             })
         }
-
 
     }
 

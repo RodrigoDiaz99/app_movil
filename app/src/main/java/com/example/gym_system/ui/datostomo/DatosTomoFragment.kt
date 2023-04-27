@@ -15,24 +15,23 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.FragmentTransaction
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.example.pruebadrawer.R
-import com.example.pruebadrawer.databinding.FragmentDatosTomoBinding
-import com.example.pruebadrawer.ui.datospredio.ResultadosPredioFragment
+import com.example.gym_system.R
+import com.example.gym_system.databinding.FragmentPedidoBinding
 
 
-class DatosTomoFragment : Fragment(R.layout.fragment_datos_tomo) {
+class DatosTomoFragment : Fragment(R.layout.fragment_pedido) {
 
-    private var _binding: FragmentDatosTomoBinding? = null
+    private var _binding: FragmentPedidoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDatosTomoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val root = inflater.inflate(R.layout.fragment_productos, container, false)
 
-        val spinnerLibro: Spinner = binding.spinnerLibro
+
+        val spinnerProductos: Spinner = root.findViewById(R.id.product_spinner)
         val spinnerTipopredio: Spinner = binding.spinnerTipoPredio
         val spinnerVolumen: Spinner = binding.spinnerVolumen
         val btnBuscarTomo: Button = binding.btnBuscarTomo
