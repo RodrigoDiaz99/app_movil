@@ -1,18 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.example.pruebadrawer'
-    compileSdk 32
+    namespace 'com.example.gymapp'
+    compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.pruebadrawer"
-        minSdk 21
-        targetSdk 32
+        applicationId "com.example.gymapp"
+        minSdk 24
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -25,7 +23,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -34,13 +31,11 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        dataBinding true
-        viewBinding  true
+        viewBinding true
     }
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
@@ -76,11 +71,11 @@ dependencies {
     // Coroutines
     implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1')
     implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1')
-    implementation('androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1')
+    implementation('androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1')
 
     implementation 'com.github.f0ris.sweetalert:library:1.5.6'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
-    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+
 
 }

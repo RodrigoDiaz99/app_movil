@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="ShapeAppearanceOverlay.Material3ExtendedFab" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+    <dimen name="design_fab_elevation" tools:ignore="PrivateResource">6dp</dimen>
+    <dimen name="design_fab_translation_z_pressed" tools:ignore="PrivateResource">12dp</dimen>
+    <style name="ExtendedFabElevatedButton" parent="@style/Widget.Material3.Button.ElevatedButton">
+        <item name="shapeAppearance">@style/ShapeAppearanceOverlay.Material3ExtendedFab</item>
+        <item name="elevation" tools:ignore="PrivateResource">@dimen/design_fab_elevation</item>
+        <item name="pressedTranslationZ" tools:ignore="PrivateResource">@dimen/design_fab_translation_z_pressed</item>
+       <!-- <item name="backgroundTint">@color/your_color</item>-->
+    </style>
+
+
+</resources>

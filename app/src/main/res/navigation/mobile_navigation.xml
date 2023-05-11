@@ -7,37 +7,30 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.pruebadrawer.ui.home.HomeFragment"
-        android:label="@string/inicio"
+        android:name="com.example.gymapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_qr_catastro"
-        android:name="com.example.pruebadrawer.ui.qr.catastro.QrCatastroFragment"
-        android:label="@string/verifica_qr_catastro"
-        tools:layout="@layout/fragment_qr_catastro" />
+        android:id="@+id/nav_gallery"
+        android:name="com.example.gymapp.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_qr_rpp"
-        android:name="com.example.pruebadrawer.ui.qr.rpp.QrRppFragment"
-        android:label="@string/verifica_documento_rpp"
-        tools:layout="@layout/fragment_qr_rpp" />
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.gymapp.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_product"
+        android:name="com.example.gymapp.ui.product.ProductFragment"
+        android:label="@string/menu_product"
+        tools:layout="@layout/fragment_product" />
 
     <fragment
-        android:id="@+id/nav_productos"
-        android:name="com.example.gym_system.ui.productos.ProductsFragment"
-        android:label="@string/seguimiento"
-        tools:layout="@layout/fragment_seguimiento" />
-
-    <fragment
-        android:id="@+id/nav_predio"
-        android:name="com.example.pruebadrawer.ui.datospredio.ConsultarPredioFragment"
-        android:label="@string/datos_del_predio"
-        tools:layout="@layout/fragment_consultar_predio" />
-
-    <fragment
-        android:id="@+id/nav_tomo"
-        android:name="com.example.pruebadrawer.ui.datostomo.DatosTomoFragment"
-        android:label="@string/datos_del_tomo"
-        tools:layout="@layout/fragment_pedido" />
+        android:id="@+id/nav_pedidos"
+        android:name="com.example.gymapp.ui.pedidos.PedidosFragment"
+        android:label="@string/menu_pedidos"
+        tools:layout="@layout/fragment_pedidos" />
 </navigation>
