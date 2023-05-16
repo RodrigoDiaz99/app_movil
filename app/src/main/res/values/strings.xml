@@ -18,4 +18,6 @@
     <string name="plus">+</string>
     <string name="less">-</string>
     <string name="menu_pedidos">Pedidos</string>
+    <string name="selected_product">Productos Seleccionados:</string>
+    <string name="cantidad">Cantidad</string>
 </resources>
