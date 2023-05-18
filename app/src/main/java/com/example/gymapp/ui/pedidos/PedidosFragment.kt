@@ -33,14 +33,14 @@ class PedidosFragment : Fragment() {
     private lateinit var quantityTextView: TextView
 
     private var productos: List<Data> = listOf()
-    private val selectedProducts = mutableListOf<Data>()
+//    private val selectedProducts = mutableListOf<Data>()
 
 
     // Aquí deberías colocar tu adaptador personalizado para el RecyclerView
-    private lateinit var adapter: CustomAdapter
+//    private lateinit var adapter: CustomAdapter
     private val productList = mutableListOf<Product>()
-    val productosSeleccionados = mutableMapOf<String, Int>()
-
+    private val selectedProducts = mutableMapOf<String, Int>()
+    private lateinit var adapter: CustomAdapter  // Asegúrate de reemplazar 'CustomAdapter' con tu adaptador de RecyclerView
     @SuppressLint("MissingInflatedId")
     @OptIn(InternalCoroutinesApi::class)
     override fun onCreateView(
@@ -50,10 +50,12 @@ class PedidosFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pedidos, container, false)
 
-
         spinner = view.findViewById(R.id.spinner)
-        quantityTextView = view.findViewById(R.id.quantity_text_view)
-        selectedProductTextView = view.findViewById(R.id.selected_product_text_view) // Asegúrate de reemplazar `R.id.selected_products_text_view` con el ID correcto
+        selectedProductTextView = view.findViewById(R.id.selected_product_text_view)
+        // Inicializa tu RecyclerView y adaptador aquí
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        adapter = CustomAdapter(selectedProducts)
+        recyclerView.adapter = adapter
 
         spinnerProduct()
         return view
@@ -61,23 +63,21 @@ class PedidosFragment : Fragment() {
 
     fun setSpinnerListener(spinner: Spinner) {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
+            @SuppressLint("NotifyDataSetChanged")
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 // Get the selected product from the spinner
                 val product = productos[position]
 
                 // If product is already selected, increment its quantity
-                val quantity = productosSeleccionados[product.cNombreProduct]?.plus(1) ?: 1
+                val quantity = selectedProducts[product.cNombreProduct]?.plus(1) ?: 1
 
                 // Update the quantity in the map
-                productosSeleccionados[product.cNombreProduct] = quantity
+                selectedProducts[product.cNombreProduct] = quantity
 
-                // Set the quantity of the product
-                quantityTextView.text = quantity.toString()
-
-                // Add the product name to the TextView
-                selectedProductTextView.text = "${selectedProductTextView.text}\n${product.cNombreProduct} - Quantity: $quantity"
+                // Update the TextView that displays the selected products
+                selectedProductTextView.text = selectedProducts.entries.joinToString("\n") { "${it.key} - Quantity: ${it.value}" }
             }
+
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Do nothing
