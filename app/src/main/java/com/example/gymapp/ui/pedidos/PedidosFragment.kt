@@ -1,12 +1,12 @@
 package com.example.gymapp.ui.pedidos
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gym_system.interfaces.retrofit
 import com.example.gym_system.interfaces.service
@@ -14,119 +14,122 @@ import com.example.gym_system.models.productos.Data
 import com.example.gym_system.models.productos.getProducts
 import com.example.gymapp.R
 import com.example.gymapp.global.APIServices
-import com.example.gymapp.global.CustomAdapter
-import com.example.gymapp.global.Product
-import kotlinx.coroutines.InternalCoroutinesApi
-
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import java.util.*
 
 class PedidosFragment : Fragment() {
+    private lateinit var spinnerProductos: Spinner
+    private lateinit var listaProductos: List<Data>
+    private lateinit var listaPedidos: MutableList<Data>
+    private lateinit var txtPrecioTotal: TextView
+    private lateinit var txtProductosSeleccionados: TextView
 
-    private lateinit var spinner: Spinner
-    private var isFirstSelection = true
-
-    private lateinit var selectedProductTextView: TextView
-    private lateinit var quantityTextView: TextView
-
-    private var productos: List<Data> = listOf()
-//    private val selectedProducts = mutableListOf<Data>()
-
-
-    // Aquí deberías colocar tu adaptador personalizado para el RecyclerView
-//    private lateinit var adapter: CustomAdapter
-    private val productList = mutableListOf<Product>()
-    private val selectedProducts = mutableMapOf<String, Int>()
-    private lateinit var adapter: CustomAdapter  // Asegúrate de reemplazar 'CustomAdapter' con tu adaptador de RecyclerView
-    @SuppressLint("MissingInflatedId")
-    @OptIn(InternalCoroutinesApi::class)
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_pedidos, container, false)
 
-        spinner = view.findViewById(R.id.spinner)
-        selectedProductTextView = view.findViewById(R.id.selected_product_text_view)
-        // Inicializa tu RecyclerView y adaptador aquí
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        adapter = CustomAdapter(selectedProducts)
-        recyclerView.adapter = adapter
+        spinnerProductos = view.findViewById(R.id.spinner_productos)
+        listaProductos = emptyList()
+        listaPedidos = mutableListOf()
+        txtPrecioTotal = view.findViewById(R.id.txt_precio_total)
+        txtProductosSeleccionados = view.findViewById(R.id.txt_productos_seleccionados)
 
-        spinnerProduct()
+        service = retrofit.create(APIServices::class.java) // Establecer conexión con la API
+
+        cargarProductos()
+        configurarSpinner()
+
         return view
     }
 
-    fun setSpinnerListener(spinner: Spinner) {
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                // Get the selected product from the spinner
-                val product = productos[position]
 
-                // If product is already selected, increment its quantity
-                val quantity = selectedProducts[product.cNombreProduct]?.plus(1) ?: 1
-
-                // Update the quantity in the map
-                selectedProducts[product.cNombreProduct] = quantity
-
-                // Update the TextView that displays the selected products
-                selectedProductTextView.text = selectedProducts.entries.joinToString("\n") { "${it.key} - Quantity: ${it.value}" }
-            }
-
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Do nothing
-            }
-        }
-    }
-
-
-
-
-
-
-
-    private fun spinnerProduct() {
-        service = retrofit.create(APIServices::class.java)
+    private fun cargarProductos() {
+        // Llamada a la API para obtener la lista de productos
         service.getProductos().enqueue(object : Callback<getProducts> {
-
             override fun onResponse(call: Call<getProducts>, response: Response<getProducts>) {
-                println(response)
                 if (response.isSuccessful) {
-                    println(response)
-                    val productosAPI = response.body()?.data
-                    productosAPI?.let {
-                        productos = it // Aquí reemplazas los datos de la lista de productos con los datos de la API
-                        val adapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_spinner_item,
-                            it.map { producto -> producto.cNombreProduct }
-                        )
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        spinner.adapter = adapter
-
-                        // Call setSpinnerListener here
-                        setSpinnerListener(spinner)
-                    }
+                    val result = response.body()
+                    listaProductos = result?.data ?: emptyList()
+                    mostrarProductos(listaProductos)
                 } else {
-                    // Maneja el error
+                    // Manejar error en la respuesta de la API
                 }
             }
 
-
             override fun onFailure(call: Call<getProducts>, t: Throwable) {
-                TODO("Not yet implemented")
+                // Manejar error en la llamada a la API
             }
         })
     }
 
+    private fun mostrarProductos(productos: List<Data>) {
+        val productosConSeleccion = mutableListOf("Seleccionar producto") + productos.map { it.cNombreProduct }
+        val adaptadorProductos = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, productosConSeleccion)
+        adaptadorProductos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerProductos.adapter = adaptadorProductos
+    }
+
+    private fun configurarSpinner() {
+        spinnerProductos.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val productoSeleccionado = spinnerProductos.getItemAtPosition(position) as String
+                if (productoSeleccionado != "Seleccionar producto") {
+                    modificarCantidadProducto(productoSeleccionado)
+                }
+                spinnerProductos.setSelection(0) // Reiniciar el Spinner a "Seleccionar producto"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // No se seleccionó nada en el spinner
+            }
+        }
+    }
+
+    private fun modificarCantidadProducto(nombreProducto: String) {
+        val producto = listaProductos.find { it.cNombreProduct == nombreProducto }
+        if (producto != null) {
+            val pedidoExistente = listaPedidos.find { it.cNombreProduct == nombreProducto }
+            if (pedidoExistente != null) {
+                pedidoExistente.quantity += 1
+            } else {
+                val nuevoProducto = Data(producto.cCodeBar, producto.cNombreProduct, producto.iIDProducto, 1, producto.price)
+                listaPedidos.add(nuevoProducto)
+            }
+        }
+
+        mostrarProductosSeleccionados()
+        calcularPrecioTotal()
+    }
 
 
+    private fun mostrarProductosSeleccionados() {
+        val sb = StringBuilder()
+        for (producto in listaPedidos) {
+            val totalProducto = producto.quantity * producto.price
+            sb.append("Producto: ${producto.cNombreProduct} - Cantidad: ${producto.quantity} - Total: ${String.format(Locale.getDefault(), "%.2f", totalProducto)}\n")
+        }
+        txtProductosSeleccionados.text = sb.toString()
+    }
 
+
+    private fun calcularPrecioTotal() {
+        var precioTotal = 0.0
+        for (producto in listaPedidos) {
+            precioTotal += producto.quantity * producto.price
+        }
+        txtPrecioTotal.text = String.format(Locale.getDefault(), "Total: %.2f", precioTotal)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,39 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.pedidos.PedidosFragment">
+    android:orientation="vertical">
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
+        android:id="@+id/spinner_productos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:prompt="@string/select_product_prompt" />
 
-        <TextView
-            android:id="@+id/quantity_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quantity" />
+    <TextView
+        android:id="@+id/txt_productos_seleccionados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selected_products_label" />
 
-        <TextView
-            android:id="@+id/selected_product_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selected products:" />
-
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/spinner"/>
+    <TextView
+        android:id="@+id/txt_precio_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_price_label" />
+    <Button
+        android:id="@+id/btn_realizar_pedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Realizar Pedido"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        />
 
 </LinearLayout>

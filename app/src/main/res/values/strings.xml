@@ -20,4 +20,8 @@
     <string name="menu_pedidos">Pedidos</string>
     <string name="selected_product">Productos Seleccionados:</string>
     <string name="cantidad">Cantidad</string>
+    <string name="selecciona_producto">Seleccionar Producto</string>
+    <string name="total_price_label">Total Precio</string>
+    <string name="select_product_prompt">Seleccionar Producto</string>
+    <string name="selected_products_label">Productos seleccionados</string>
 </resources>
