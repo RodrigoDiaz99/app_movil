@@ -45,6 +45,7 @@ class PedidosFragment : Fragment() {
 
 
     private fun cargarProductos() {
+        service = retrofit.create(APIServices::class.java)
         // Llamada a la API para obtener la lista de productos
         service.getProductos().enqueue(object : Callback<getProducts> {
             override fun onResponse(call: Call<getProducts>, response: Response<getProducts>) {
