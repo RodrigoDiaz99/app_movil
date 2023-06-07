@@ -33,7 +33,7 @@ class PedidosFragment : Fragment() {
         listaProductos = emptyList()
         listaPedidos = mutableListOf()
         txtPrecioTotal = view.findViewById(R.id.txt_precio_total)
-        txtProductosSeleccionados = view.findViewById(R.id.txt_productos_seleccionados)
+       // txtProductosSeleccionados = view.findViewById(R.id.txt_productos_seleccionados)
 
         service = retrofit.create(APIServices::class.java) // Establecer conexión con la API
 
@@ -105,12 +105,46 @@ class PedidosFragment : Fragment() {
 
 
     private fun mostrarProductosSeleccionados() {
-        val sb = StringBuilder()
+        val layoutProductosSeleccionados = view?.findViewById<LinearLayout>(R.id.layout_productos_seleccionados)
+        layoutProductosSeleccionados?.removeAllViews()
+
         for (producto in listaPedidos) {
             val totalProducto = producto.quantity * producto.price
-            sb.append("Producto: ${producto.cNombreProduct} - Cantidad: ${producto.quantity} - Total: ${String.format(Locale.getDefault(), "%.2f", totalProducto)}\n")
+
+            val linearLayout = LinearLayout(requireContext())
+            linearLayout.orientation = LinearLayout.HORIZONTAL
+            linearLayout.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+            val textView = TextView(requireContext())
+            textView.text = "Producto: ${producto.cNombreProduct} - Cantidad: ${producto.quantity} - Total: ${String.format(Locale.getDefault(), "%.2f", totalProducto)}"
+            textView.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                1f
+            )
+
+            val button = Button(requireContext())
+            button.text = "-"
+            button.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+            button.setOnClickListener {
+                restarCantidadProducto(producto.cNombreProduct)
+            }
+
+            if (producto.quantity > 1) {
+                linearLayout.addView(textView)
+                linearLayout.addView(button)
+                layoutProductosSeleccionados?.addView(linearLayout)
+            } else {
+                layoutProductosSeleccionados?.addView(textView)
+            }
         }
-        txtProductosSeleccionados.text = sb.toString()
     }
 
 
@@ -120,6 +154,18 @@ class PedidosFragment : Fragment() {
             precioTotal += producto.quantity * producto.price
         }
         txtPrecioTotal.text = String.format(Locale.getDefault(), "Total: %.2f", precioTotal)
+    }
+    private fun restarCantidadProducto(nombreProducto: String) {
+        val producto = listaPedidos.find { it.cNombreProduct == nombreProducto }
+        if (producto != null) {
+            producto.quantity -= 1
+            if (producto.quantity == 0) {
+                listaPedidos.remove(producto)
+            }
+        }
+
+        mostrarProductosSeleccionados()
+        calcularPrecioTotal()
     }
 }
 
