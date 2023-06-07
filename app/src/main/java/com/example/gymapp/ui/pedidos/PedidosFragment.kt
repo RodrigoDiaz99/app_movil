@@ -126,26 +126,38 @@ class PedidosFragment : Fragment() {
                 1f
             )
 
-            val button = Button(requireContext())
-            button.text = "-"
-            button.layoutParams = LinearLayout.LayoutParams(
+            val buttonRestar = Button(requireContext())
+            buttonRestar.text = "-"
+            buttonRestar.layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-
-            button.setOnClickListener {
+            buttonRestar.setOnClickListener {
                 restarCantidadProducto(producto.cNombreProduct)
+            }
+
+            val buttonEliminar = Button(requireContext())
+            buttonEliminar.text = "Eliminar"
+            buttonEliminar.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            buttonEliminar.setOnClickListener {
+                eliminarProducto(producto.cNombreProduct)
             }
 
             if (producto.quantity > 1) {
                 linearLayout.addView(textView)
-                linearLayout.addView(button)
+                linearLayout.addView(buttonRestar)
                 layoutProductosSeleccionados?.addView(linearLayout)
             } else {
-                layoutProductosSeleccionados?.addView(textView)
+                linearLayout.addView(textView)
+                linearLayout.addView(buttonEliminar)
+                layoutProductosSeleccionados?.addView(linearLayout)
             }
         }
     }
+
 
 
     private fun calcularPrecioTotal() {
@@ -167,6 +179,16 @@ class PedidosFragment : Fragment() {
         mostrarProductosSeleccionados()
         calcularPrecioTotal()
     }
+    private fun eliminarProducto(nombreProducto: String) {
+        val producto = listaPedidos.find { it.cNombreProduct == nombreProducto }
+        if (producto != null) {
+            listaPedidos.remove(producto)
+        }
+
+        mostrarProductosSeleccionados()
+        calcularPrecioTotal()
+    }
+
 }
 
 
