@@ -1,13 +1,13 @@
 package com.example.gymapp.ui.pedidos
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+
 import com.example.gym_system.interfaces.retrofit
 import com.example.gym_system.interfaces.service
 import com.example.gym_system.models.productos.Data
@@ -24,7 +24,7 @@ class PedidosFragment : Fragment() {
     private lateinit var listaProductos: List<Data>
     private lateinit var listaPedidos: MutableList<Data>
     private lateinit var txtPrecioTotal: TextView
-    private lateinit var txtProductosSeleccionados: TextView
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_pedidos, container, false)
@@ -104,6 +104,7 @@ class PedidosFragment : Fragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun mostrarProductosSeleccionados() {
         val layoutProductosSeleccionados = view?.findViewById<LinearLayout>(R.id.layout_productos_seleccionados)
         layoutProductosSeleccionados?.removeAllViews()
@@ -136,6 +137,16 @@ class PedidosFragment : Fragment() {
                 restarCantidadProducto(producto.cNombreProduct)
             }
 
+            val buttonAumentar = Button(requireContext())
+            buttonAumentar.text = "+"
+            buttonAumentar.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            buttonAumentar.setOnClickListener {
+                aumentarCantidadProducto(producto.cNombreProduct)
+            }
+
             val buttonEliminar = Button(requireContext())
             buttonEliminar.text = "Eliminar"
             buttonEliminar.layoutParams = LinearLayout.LayoutParams(
@@ -149,14 +160,19 @@ class PedidosFragment : Fragment() {
             if (producto.quantity > 1) {
                 linearLayout.addView(textView)
                 linearLayout.addView(buttonRestar)
-                layoutProductosSeleccionados?.addView(linearLayout)
+                linearLayout.addView(buttonAumentar)
             } else {
                 linearLayout.addView(textView)
                 linearLayout.addView(buttonEliminar)
-                layoutProductosSeleccionados?.addView(linearLayout)
+                linearLayout.addView(buttonAumentar)
             }
+
+            layoutProductosSeleccionados?.addView(linearLayout)
         }
     }
+
+
+
 
 
 
@@ -188,6 +204,16 @@ class PedidosFragment : Fragment() {
         mostrarProductosSeleccionados()
         calcularPrecioTotal()
     }
+    private fun aumentarCantidadProducto(nombreProducto: String) {
+        val producto = listaPedidos.find { it.cNombreProduct == nombreProducto }
+        if (producto != null) {
+            producto.quantity += 1
+        }
+
+        mostrarProductosSeleccionados()
+        calcularPrecioTotal()
+    }
+
 
 }
 
